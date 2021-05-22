@@ -63,7 +63,7 @@ public class ShowNeighbourActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null){
             neighbour = (Neighbour) extras.getSerializable("neighbour");
-            String image = neighbour.getAvatarUrl().replace("150","450");
+            String image = neighbour.getAvatarUrl().replace("/150?","/450?");
             String facebook = "www.facebook.fr/" +neighbour.getName().toLowerCase();
 
             Glide.with(imageView.getContext())
