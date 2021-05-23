@@ -89,18 +89,24 @@ public class NeighboursListTest {
 
     @Test
     public void myNeighboursList_clickItem_shouldOpenShowActivity() {
-        /*onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(0, withChild(R.id.item_list_name)));*/
         onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
-                /*.perform(RecyclerViewActions.scrollToPosition(0).perform();
-                        withChild(withId(R.id.item_list_name)).matches(withText(neighbour.getName()))),*/
-                        //withChild(hasDescendant(withText(neighbour.getName()))))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        //onView(withId(R.id.nameView)).check(matches(isDisplayed()));
         onView(withId(R.id.nameView)).check(matches(withText(neighbour.getName())));
-       /* onView(withId(...)).perform(scrollTo(hasDescendant(withText(...))))
-        .perform(RecyclerViewActions.actionOnItemAtPosition(0,hasDescendant(withText(neighbour.getName())))*/
 
     }
+
+    @Test
+    public void myNeighboursList_addFav_shouldAppearOnFavList() {
+        onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.add_fav)).perform(click());
+        onView(withId(R.id.backHome)).perform(click());
+        onView(withText(R.string.tab_favorites_title)).perform(click());
+        onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(1));
+        onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.nameView)).check(matches(withText(neighbour.getName())));
+    }
+
 
 }
