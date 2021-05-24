@@ -9,7 +9,8 @@
 2. En dossier compresser
 * Cliquez sur "Code" (1 sur l'image)
 * Puis "Download ZIP" (2 sur l'image)
-![img-git.png](https://postimg.cc/D8WCG5WW)
+
+![img-git.png](https://i.postimg.cc/TY0BZ4fc/img-git.png)
 
 ## Instalation
 
