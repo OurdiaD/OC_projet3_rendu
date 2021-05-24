@@ -17,7 +17,7 @@
 1. Ouvrez Android Studio
 2. Cliquez sur "File" puis "Open"
 3. Sélectionnez le dossier "Entrevoisins" 
-4. Laissez Gradle finir de ce synchronisé
+4. Laissez Gradle finir de synchronisé
 
 ## Lancement
 1. Avec Android Studio
