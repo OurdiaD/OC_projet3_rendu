@@ -10,7 +10,7 @@
 * Cliquez sur "Code" (1 sur l'image)
 * Puis "Download ZIP" (2 sur l'image)
 
-![img-git.png](https://i.postimg.cc/TY0BZ4fc/img-git.png)
+![img-git.png](https://i.postimg.cc/LsryYhcx/img-git.png)
 
 ## Instalation
 
