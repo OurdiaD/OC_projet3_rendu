@@ -68,8 +68,6 @@ public class NeighboursListTest {
     @Test
     public void myNeighboursList_shouldNotBeEmpty() {
         // First scroll to the position that needs to be matched and click on it.
-        /*onView(withId(R.id.list_neighbours))
-                .check(matches(hasMinimumChildCount(1)));*/
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(matches(hasMinimumChildCount(1)));
     }
 
@@ -92,21 +90,24 @@ public class NeighboursListTest {
         onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.nameView)).check(matches(withText(neighbour.getName())));
-
     }
 
     @Test
-    public void myNeighboursList_addFav_shouldAppearOnFavList() {
+    public void myNeighboursList_addFav_shouldAppearOnlyFavs() {
         onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.add_fav)).perform(click());
         onView(withId(R.id.backHome)).perform(click());
         onView(withText(R.string.tab_favorites_title)).perform(click());
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(1));
+    }
+
+    @Test
+    public void myNeighboursList_fav_checkNeighbour() {
+        onView(withText(R.string.tab_favorites_title)).perform(click());
         onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.nameView)).check(matches(withText(neighbour.getName())));
     }
-
 
 }

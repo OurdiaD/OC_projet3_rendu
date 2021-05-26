@@ -65,4 +65,13 @@ public class NeighbourServiceTest {
         service.editNeighbour(neighbourToEdit);
         assertTrue(service.getNeighbours().get(0).getFav());
     }
+
+    @Test
+    public void getFavsWithSuccess(){
+        Neighbour neighbour = service.getNeighbours().get(0);
+        neighbour.setFav(true);
+        service.editNeighbour(neighbour);
+        List<Neighbour> neighboursFav = service.getFavs();
+        assertSame(1, neighboursFav.size());
+    }
 }
