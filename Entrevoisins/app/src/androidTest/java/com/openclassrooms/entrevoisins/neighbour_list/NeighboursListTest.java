@@ -89,6 +89,14 @@ public class NeighboursListTest {
     public void myNeighboursList_clickItem_shouldOpenShowActivity() {
         onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.showNeighbour)).check(matches(isDisplayed()));
+    }
+
+
+    @Test
+    public void myNeighboursList_clickItem_checkDataShowActivity() {
+        onView(allOf(withId(R.id.list_neighbours),isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.nameView)).check(matches(withText(neighbour.getName())));
     }
 
