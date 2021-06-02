@@ -1,22 +1,16 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.annotation.SuppressLint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
@@ -26,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+@SuppressLint("NonConstantResourceId")
 public class ShowNeighbourActivity extends AppCompatActivity {
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -63,23 +58,24 @@ public class ShowNeighbourActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null){
             neighbour = (Neighbour) extras.getSerializable("neighbour");
-            String image = neighbour.getAvatarUrl().replace("/150?","/450?");
-            String facebook = "www.facebook.fr/" +neighbour.getName().toLowerCase();
+            if (neighbour != null) {
+                String image = neighbour.getAvatarUrl().replace("/150?","/450?");
+                String facebook = "www.facebook.fr/" +neighbour.getName().toLowerCase();
 
-            Glide.with(imageView.getContext())
-                    .load(image)
-                    .into(imageView);
-            nameView.setText(neighbour.getName());
-            listName.setText(neighbour.getName());
-            listAdress.setText(neighbour.getAddress());
-            listTel.setText(neighbour.getPhoneNumber());
-            listMail.setText(facebook);
-            contentAbout.setText(neighbour.getAboutMe());
+                Glide.with(imageView.getContext())
+                        .load(image)
+                        .into(imageView);
+                nameView.setText(neighbour.getName());
+                listName.setText(neighbour.getName());
+                listAdress.setText(neighbour.getAddress());
+                listTel.setText(neighbour.getPhoneNumber());
+                listMail.setText(facebook);
+                contentAbout.setText(neighbour.getAboutMe());
 
-            if(neighbour.getFav()){
-                changeStar(true);
+                changeStar(neighbour.getFav());
             } else {
-                changeStar(false);
+                Toast.makeText(getBaseContext(),"Le voisin n'existe pas",Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
@@ -98,15 +94,16 @@ public class ShowNeighbourActivity extends AppCompatActivity {
 
     private void changeStar(Boolean fav){
         int colorFav = getResources().getColor(R.color.colorFav);
+        Drawable star;
         if(fav){
-            Drawable star = getDrawable(R.drawable.ic_star_white_24dp);
-            star.setColorFilter(colorFav, PorterDuff.Mode.SRC_IN);
-            addFav.setImageDrawable(star);
+            star = getDrawable(R.drawable.ic_star_white_24dp);
         } else {
-            Drawable star = getDrawable(R.drawable.ic_star_border_white_24dp);
-            star.setColorFilter(colorFav, PorterDuff.Mode.SRC_IN);
-            addFav.setImageDrawable(star);
+            star = getDrawable(R.drawable.ic_star_border_white_24dp);
         }
+        if (star != null) {
+            star.setColorFilter(colorFav, PorterDuff.Mode.SRC_IN);
+        }
+        addFav.setImageDrawable(star);
     }
 
     @OnClick(R.id.backHome)

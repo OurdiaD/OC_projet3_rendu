@@ -1,11 +1,11 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.Button;
 
 import com.openclassrooms.entrevoisins.R;
 
@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+@SuppressLint("NonConstantResourceId")
 public class ListNeighbourActivity extends AppCompatActivity {
 
     // UI Components

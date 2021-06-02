@@ -30,9 +30,9 @@ public class Neighbour implements Serializable {
 
     /**
      * Constructor
-     * @param id
-     * @param name
-     * @param avatarUrl
+     * @param id generated
+     * @param name written
+     * @param avatarUrl generated
      */
     public Neighbour(long id, String name, String avatarUrl, String address,
                      String phoneNumber, String aboutMe) {

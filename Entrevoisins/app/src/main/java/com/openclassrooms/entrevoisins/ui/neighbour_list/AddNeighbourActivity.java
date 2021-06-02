@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputLayout;
@@ -23,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+@SuppressLint("NonConstantResourceId")
 public class AddNeighbourActivity extends AppCompatActivity {
 
     @BindView(R.id.avatar)
@@ -46,6 +48,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_neighbour);
         ButterKnife.bind(this);
+        if (getSupportActionBar() != null)
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mApiService = DI.getNeighbourApiService();
         init();
@@ -53,11 +56,9 @@ public class AddNeighbourActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home : {
-                finish();
-                return true;
-            }
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -66,6 +67,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
         mNeighbourImage = randomImage();
         Glide.with(this).load(mNeighbourImage).placeholder(R.drawable.ic_account)
                 .apply(RequestOptions.circleCropTransform()).into(avatar);
+        if(nameInput.getEditText() != null)
         nameInput.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -81,13 +83,27 @@ public class AddNeighbourActivity extends AppCompatActivity {
 
     @OnClick(R.id.create)
     void addNeighbour() {
+        String name = "";
+        String address = "";
+        String phone = "";
+        String aboutMe = "";
+
+        if(nameInput.getEditText() != null)
+            name = nameInput.getEditText().getText().toString();
+        if(addressInput.getEditText() != null)
+            address = addressInput.getEditText().getText().toString();
+        if(phoneInput.getEditText() != null)
+            phone = phoneInput.getEditText().getText().toString();
+        if(aboutMeInput.getEditText() != null)
+            aboutMe = aboutMeInput.getEditText().getText().toString();
+
         Neighbour neighbour = new Neighbour(
                 System.currentTimeMillis(),
-                nameInput.getEditText().getText().toString(),
+                name,
                 mNeighbourImage,
-                addressInput.getEditText().getText().toString(),
-                phoneInput.getEditText().getText().toString(),
-                aboutMeInput.getEditText().getText().toString()
+                address,
+                phone,
+                aboutMe
         );
         mApiService.createNeighbour(neighbour);
         finish();
@@ -103,7 +119,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
 
     /**
      * Used to navigate to this activity
-     * @param activity
+     * @param activity Fragment activity
      */
     public static void navigate(FragmentActivity activity) {
         Intent intent = new Intent(activity, AddNeighbourActivity.class);

@@ -24,20 +24,20 @@ public interface NeighbourApiService {
 
     /**
      * Deletes a neighbour
-     * @param neighbour
+     * @param neighbour neighbour selected
      */
     void deleteNeighbour(Neighbour neighbour);
 
     /**
      * Create a neighbour
-     * @param neighbour
+     * @param neighbour new neighbour
      */
     void createNeighbour(Neighbour neighbour);
 
 
     /**
      * Edit a neighbour
-     * @param neighbour
+     * @param neighbour neighbour selected
      */
     void editNeighbour(Neighbour neighbour);
 }

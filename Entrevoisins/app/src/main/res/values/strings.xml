@@ -4,4 +4,6 @@
     <string name="tab_favorites_title">Favorites</string>
     <string name="activity_new_neighbour">New neighbour</string>
     <string name="about_me">A propos de moi</string>
+    <string name="avatar">avatar</string>
+    <string name="delete_button">delete button</string>
 </resources>

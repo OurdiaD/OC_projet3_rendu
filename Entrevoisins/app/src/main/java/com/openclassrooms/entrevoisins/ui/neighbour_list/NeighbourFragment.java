@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +19,12 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
     public static final String KEY_POSITION="position";
 
@@ -59,6 +56,7 @@ public class NeighbourFragment extends Fragment {
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        if (getContext() != null)
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         return view;
     }
@@ -67,8 +65,12 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        int position = getArguments().getInt(KEY_POSITION, -1);
+        int position = 0;
+        if (getArguments() != null) {
+            position = getArguments().getInt(KEY_POSITION, -1);
+        }
 
+        List<Neighbour> mNeighbours;
         if (position == 0){
             mNeighbours = mApiService.getNeighbours();
         } else {
@@ -98,7 +100,7 @@ public class NeighbourFragment extends Fragment {
 
     /**
      * Fired if the user clicks on a delete button
-     * @param event
+     * @param event event delete neighbour
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {

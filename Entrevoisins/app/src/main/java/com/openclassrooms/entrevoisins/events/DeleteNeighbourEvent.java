@@ -14,7 +14,7 @@ public class DeleteNeighbourEvent {
 
     /**
      * Constructor.
-     * @param neighbour
+     * @param neighbour selected
      */
     public DeleteNeighbourEvent(Neighbour neighbour) {
         this.neighbour = neighbour;
